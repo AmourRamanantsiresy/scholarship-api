@@ -1,0 +1,1171 @@
+openapi: "3.0.2"
+info:
+  title: Scholarship API
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+  - url: https://virtserver.swaggerhub.com/AmourRamanantsiresy/Scholarship/1.0.0
+
+
+paths:
+  /ping:
+    get:
+      tags:
+        - "Security"
+      operationId: ping
+      responses:
+        "200":
+          description: "Check if the server is down or not"
+          content:
+            application/json:
+              example: pong
+  /whoami:
+    get:
+      tags:
+        - "Security"
+      operationId: whoami
+      responses:
+        "200":
+          description: "success"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Candidate'
+  /user:
+    put:
+      tags:
+        - "Security"
+      operationId: createOrUpdateUser
+      description: Update an existing user if you specify the id else create new user
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              $ref: '#/components/schemas/User'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/User'
+  /language:
+    get:
+      tags:
+        - "Language"
+      operationId: getAllLanguages
+      parameters:
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IdName'
+    put:
+      tags:
+        - Language
+      operationId: createOrUpdateLanguage
+      description: Update an existing language if you specify the id else create new language
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items:
+                $ref: '#/components/schemas/IdName'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IdName'
+  /language/search:
+    get:
+      tags:
+        - "Language"
+      operationId: searchLanguages
+      parameters:
+        - $ref: '#/components/parameters/PSearch'
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+        
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IdName'
+  /study-level:
+    get:
+      tags:
+        - "StudyLevel"
+      operationId: getAllStudyLevels
+      parameters:
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IdName'
+    put:
+      tags:
+        - StudyLevel
+      operationId: createOrUpdateStudyLevel
+      description: Update an existing study-level if you specify the id else create new study-level
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items:
+                $ref: '#/components/schemas/IdName'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IdName'
+  /study-level/search:
+    get:
+      tags:
+        - "StudyLevel"
+      operationId: searchStudyLevels
+      parameters:
+        - $ref: '#/components/parameters/PSearch'
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IdName'
+  /faculty:
+    get:
+      tags:
+        - "Faculty"
+      operationId: getAllFaculties
+      parameters:
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IdName'
+    put:
+      tags:
+        - Faculty
+      operationId: createOrUpdateFaculty
+      description: Update an existing faculty if you specify the id else create new faculty
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items:
+                $ref: '#/components/schemas/IdName'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IdName'
+  /faculty/search:
+    get:
+      tags:
+        - "Faculty"
+      operationId: searchFaculties
+      parameters:
+        - $ref: '#/components/parameters/PSearch'
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IdName'
+  /graduation:
+    get:
+      tags:
+        - "Graduation"
+      operationId: getAllGraduations
+      parameters:
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IdName'
+    put:
+      tags:
+        - Graduation
+      operationId: createOrUpdateGraduation
+      description: Update an existing graduation if you specify the id else create new graduation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/IdName'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/IdName'
+  /graduation/search:
+    get:
+      tags:
+        - "Graduation"
+      operationId: searchGraduations
+      parameters:
+        - $ref: '#/components/parameters/PSearch'
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/IdName'
+  /amount:
+    get:
+      tags:
+        - "Amount"
+      operationId: getAllAmounts
+      parameters:
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Amount'
+    put:
+      tags:
+        - Amount
+      operationId: createOrUpdateAmount
+      description: Update an existing amount if you specify the id else create new amount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Amount'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Amount'
+  /country:
+    get:
+      tags:
+        - "Country"
+      operationId: getAllCountries
+      parameters:
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+        - $ref: '#/components/parameters/PCountry'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RestCountry'
+    put:
+      tags:
+        - Country
+      operationId: createOrUpdateCountry
+      description: Update an existing country if you specify the id else create new country
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateCountry'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RestCountry'
+  /country/search:
+    get:
+      tags:
+        - "Country"
+      operationId: searchCountries
+      parameters:
+        - $ref: '#/components/parameters/PSearch'
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+        - $ref: '#/components/parameters/PCountry'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RestCountry'
+  /university:
+    get:
+      tags:
+        - "University"
+      operationId: getAllUniversities
+      parameters:
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+        - $ref: '#/components/parameters/PUniversity'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RestUniversity'
+    put:
+      tags:
+        - University
+      operationId: createOrUpdateUniversity
+      description: Update an existing university if you specify the id else create new university
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateUniversity'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RestUniversity'
+  /university/search:
+    get:
+      tags:
+        - "University"
+      operationId: searchUniversities
+      parameters:
+        - $ref: '#/components/parameters/PSearch'
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+        - $ref: '#/components/parameters/PUniversity'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RestUniversity'
+  /candidate:
+    get:
+      tags:
+        - "Candidate"
+      operationId: getAllCandidates
+      parameters:
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+        - $ref: '#/components/parameters/PCandidate'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RestCandidate'
+    put:
+      tags:
+        - Candidate
+      operationId: createOrUpdateCandidate
+      description: Update an existing candidate if you specify the id else create new candidate
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateCandidate'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RestCandidate'
+  /candidate/search:
+    get:
+      tags:
+        - "Candidate"
+      operationId: searchCandidates
+      parameters:
+        - $ref: '#/components/parameters/PSearch'
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/PCandidate'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RestCandidate'
+  /scholarship:
+    get:
+      tags:
+        - "Scholarship"
+      operationId: getAllScholarships
+      parameters:
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/POrder'
+        - $ref: '#/components/parameters/PScholarship'
+
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RestScholarship'
+    put:
+      tags:
+        - Scholarship
+      operationId: createOrUpdateScholarship
+      description: Update an existing scholarship if you specify the id else create new scholarship
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: array
+              items:
+                $ref: '#/components/schemas/CreateScholarship'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RestScholarship'
+  /scholarship/search:
+    get:
+      tags:
+        - "Scholarship"
+      operationId: searchScholarships
+      parameters:
+        - $ref: '#/components/parameters/PSearch'
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - $ref: '#/components/parameters/PScholarshipSearch'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RestScholarship'
+  /scholarship/search/amount:
+    get:
+      tags:
+        - "Scholarship"
+      operationId: searchScholarshipsByAmount
+      description: find all scholarship that have a specified amount
+      parameters:
+        - name: amount
+          in: query
+          required: true
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RestScholarship'
+  /scholarship/search/duration:
+    get:
+      tags:
+        - "Scholarship"
+      operationId: searchScholarshipsByDuration
+      description: search all scholarship that have duration between two specified durations
+      parameters:
+        - name: duration1
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: duration2
+          in: query
+          required: true
+          schema:
+            type: integer
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RestScholarship'
+  /scholarship/search/creation:
+    get:
+      tags:
+        - "Scholarship"
+      operationId: searchScholarshipsByCreation
+      description: search all scholarships created between two specified dates
+      parameters:
+        - name: beginning
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - name: ending
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RestScholarship'
+  /application/candidate/{id}:
+    get:
+      tags:
+        - "Application"
+      operationId: getAllApplicationsByCandidate
+      parameters:
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - name: id
+          in: path
+          description: The candidate id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          enum : [PENDING, ACCEPTED]
+                        scholarship: 
+                          $ref: '#/components/schemas/RestScholarship'
+  /application/scholarship/{id}/candidate:
+    get:
+      tags:
+        - "Application"
+      operationId: getAllCandidateByScholarship
+      description: Get all candidate who applied for a specified scholarship
+      parameters:
+        - $ref: '#/components/parameters/PSize'
+        - $ref: '#/components/parameters/PPage'
+        - name: id
+          in: path
+          description: The scholarship id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: "Success"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  last_page:
+                    type: number
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          enum : [PENDING, ACCEPTED]
+                        candidate:
+                          $ref: '#/components/schemas/RestCandidateMini'
+  /application/apply:
+    put:
+      tags:
+        - "Application"
+      operationId: applyToApplication
+      description: Puts a candidate as an applicant
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object  
+              properties:
+                scholarship:
+                  type: object  
+                  properties:
+                    id: 
+                      type: integer
+                candidate:
+                  type: object  
+                  properties:
+                    id: 
+                      type: integer
+      responses:
+        "200":
+          description: "success"
+          content:
+            application/json:
+              schema: 
+                type: string
+                example: 'Application success'
+  /application/accept:
+    put:
+      tags:
+        - "Application"
+      operationId: acceptApplication
+      description: accepts the application for a specific candidate
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object  
+              properties:
+                scholarship:
+                  type: object  
+                  properties:
+                    id: 
+                      type: integer
+                candidate:
+                  type: object  
+                  properties:
+                    id: 
+                      type: integer
+      responses:
+        "200":
+          description: "success"
+          content:
+            application/json:
+              schema: 
+                type: string
+                example: 'Application accepted with success'
+  /application/close:
+    put:
+      tags:
+        - "Application"
+      operationId: closeApplication
+      description: Close application about a specified scholarship
+      requestBody:
+        content:
+          application/json:
+            schema: 
+              type: object  
+              properties:
+                scholarship:
+                  type: object  
+                  properties:
+                    id: 
+                      type: integer
+      responses:
+        "200":
+          description: "success"
+          content:
+            application/json:
+              schema: 
+                type: string
+                example: 'Application accepted with success'
+
+components:
+  schemas:
+  # statics
+    IdName:
+      type: object
+      properties:
+        id: 
+          type: integer
+        name: 
+          type: string
+    Amount:
+      type: object
+      properties:
+        id: 
+          type: integer
+        amount: 
+          type: integer
+    User:
+      type: object
+      properties:
+        id: 
+          type: integer
+        username:
+          type: string
+        password: 
+          format: password
+    Candidate:
+      allOf:
+        - $ref: '#/components/schemas/RestCandidateMini'
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        school_origin:
+          type: string
+        about: 
+          type: string
+        phone_number:
+          pattern: '^\+261 \d{2} \d{2} \d{3} \d{2}$'
+          type: string
+        birth_date:
+          type: string
+          format: date
+    Scholarship:
+      type: object
+      properties:
+        id: 
+          type: integer
+        description:
+          type: string
+        duration:
+          type: integer
+          description: The duration of the study in year
+        registration_deadline:
+          type: string
+          format: date
+        status:
+          type: string
+          enum: [AVAILABLE, UNAVAILABLE]
+
+  # schemas when create or update
+    CreateCountry:
+      type: object
+      properties:
+        languages:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+                
+              
+      allOf:
+        - $ref: '#/components/schemas/IdName'
+    CreateUniversity:
+      properties:
+        country:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+      allOf:
+        - $ref: '#/components/schemas/IdName'
+    CreateCandidate:
+      allOf:
+        - $ref: '#/components/schemas/Candidate'
+      type: object
+      properties:
+        country:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+        study_level: 
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+        user: 
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: integer
+    CreateScholarship:
+      allOf:
+        - $ref: '#/components/schemas/Scholarship'
+      type: object
+      properties:
+        university:
+          $ref: '#/components/schemas/CreateUniversity'
+        faculty:
+          $ref: '#/components/schemas/IdName'
+        amount:
+          $ref: '#/components/schemas/Amount'
+  
+  # schemas when get
+    RestCountry:
+      type: object
+      properties:
+        languages:
+          type: array
+          items:
+            type: string
+            example: french       
+      allOf:
+        - $ref: '#/components/schemas/IdName'
+    RestUniversity:
+      properties:
+        country:
+          type: string
+          example: America
+        languages: 
+          type: array
+          items:
+            type: string
+            example: english
+      allOf:
+        - $ref: '#/components/schemas/IdName'
+    RestCandidate:
+      allOf:
+        - $ref: '#/components/schemas/Candidate'
+      type: object
+      properties:
+        country:
+          type: string
+        languages:
+          type: array
+          items:
+            type: string
+            example: french
+        study_level: 
+          type: string
+    RestCandidateMini:
+      type: object
+      properties:
+        id:
+          type: integer
+        last_name: 
+          type: string
+        first_name: 
+          type: string
+    RestScholarship:
+      allOf:
+        - $ref: '#/components/schemas/Scholarship'
+      type: object
+      properties:
+        faculty:
+          type: string
+        amount:
+          type: string
+        university:
+          type: string
+        country:
+          type: string
+        language:
+          type: array
+          items:
+            type: string
+            example: America
+    RestApplication:
+      type: object
+      properties:
+        id: 
+          type: integer
+        status:
+          enum: [AVAILABLE, UNAVAILABLE] 
+        scholarship: 
+          $ref: '#/components/schemas/RestScholarship' 
+        candidate: 
+          type: array
+          items:
+            type: object
+            properties:
+              candidate: 
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  last_name: 
+                    type: string
+                  first_name: 
+                    type: string
+              status:
+                type: string
+                enum: [PENDING, ACCEPTED, NON_ACCEPTED]
+  parameters:
+    PSize:
+      name: size
+      in: query
+      required: false
+      schema:
+        type: integer
+    PPage:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+    POrder:
+      name: order
+      in: query
+      required: false
+      schema:
+        enum: [ASC, DESC]
+    PSearch:
+      name: value
+      in: query
+      required: true
+      schema:
+        type: string
+    PCountry:
+      name: by
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [LANGUAGE, NAME]
+    PUniversity:
+      name: by
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [LANGUAGE, COUNTRY, NAME]
+    PCandidate:
+      name: by
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [OLD, SCHOOL_ORIGIN, STUDY_LEVEL, FIRST_NAME, LAST_NAME]
+    PScholarship: 
+      name: by
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [LANGUAGE, COUNTRY, DEADLINE, FACULTY, AMOUNT, UNIVERSITY, DURATION]
+    PScholarshipSearch:
+      name: by
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [LANGUAGE, COUNTRY, FACULTY, UNIVERSITY]
