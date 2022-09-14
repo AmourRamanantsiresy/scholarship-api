@@ -6,11 +6,13 @@ import com.web.scholarship.services.CandidateService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.config.web.servlet.headers.HeadersSecurityMarker;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 public class Security {
     CandidateService candidateService;
 
