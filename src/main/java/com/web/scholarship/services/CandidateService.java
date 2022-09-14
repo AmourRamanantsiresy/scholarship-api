@@ -4,6 +4,8 @@ import com.web.scholarship.models.Candidate;
 import com.web.scholarship.models.StudyLevel;
 import com.web.scholarship.models.dbUser.DBUser;
 import com.web.scholarship.models.mapper.CandidateMapper;
+import com.web.scholarship.models.mapper.WhoamiMapper;
+import com.web.scholarship.models.mapper.models.Whoami;
 import com.web.scholarship.repository.CandidateRepository;
 import com.web.scholarship.repository.StudyLevelRepository;
 import com.web.scholarship.models.enums.CandidateSearchType;
@@ -20,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+import static java.lang.Integer.*;
+
 @Service
 @AllArgsConstructor
 public class CandidateService {
@@ -35,9 +39,9 @@ public class CandidateService {
         return parse.format(page, size);
     }
 
-    public Candidate auth(String username) {
+    public Whoami auth(String username) {
         DBUser user = dbUserRepository.findDBUserByUsername(username);
-        return candidateRepository.findCandidateByCredentials(user);
+        return WhoamiMapper.parse(candidateRepository.findCandidateByCredentials(user));
     }
 
     @Transactional
@@ -57,7 +61,7 @@ public class CandidateService {
         DataParser<com.web.scholarship.models.mapper.models.Candidate> parse;
         List<Candidate> candidates;
         if (by == CandidateSearchType.OLD) {
-            candidates = searchByOld(Integer.valueOf(searchValue));
+            candidates = searchByOld(parseInt(searchValue));
         } else if (by == CandidateSearchType.FIRST_NAME) {
             candidates = searchByFirstname(searchValue);
         } else if (by == CandidateSearchType.LAST_NAME) {

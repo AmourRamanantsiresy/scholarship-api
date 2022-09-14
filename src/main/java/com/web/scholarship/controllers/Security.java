@@ -1,6 +1,7 @@
 package com.web.scholarship.controllers;
 
 import com.web.scholarship.models.Candidate;
+import com.web.scholarship.models.mapper.models.Whoami;
 import com.web.scholarship.services.CandidateService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.config.web.servlet.headers.HeadersSecurityMarker;
@@ -19,7 +20,7 @@ public class Security {
     }
 
     @GetMapping("whoami")
-    public Candidate whoami(@HeadersSecurityMarker Authentication auth){
+    public Whoami whoami(@HeadersSecurityMarker Authentication auth){
         String username = auth.getName();
         return candidateService.auth(username);
     }

@@ -29,8 +29,15 @@ paths:
           description: "success"
           content:
             application/json:
-              schema: 
-                $ref: '#/components/schemas/Candidate'
+              schema:
+                type: object
+                properties:
+                  candidate:
+                    $ref: '#/components/schemas/RestCandidate'
+                  roles:
+                    type: array
+                    items:
+                      type: string
   /user:
     put:
       tags:
