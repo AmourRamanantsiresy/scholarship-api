@@ -1007,7 +1007,7 @@ components:
             properties:
               id:
                 type: integer
-        user: 
+        credentials: 
           type: array
           items:
             type: object

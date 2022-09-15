@@ -26,7 +26,7 @@ public class LanguageController {
 
     @GetMapping("")
     public DataFormat<Language> getAll(
-            @RequestParam(name = "page", required = false, defaultValue = "1") int page,
+            @RequestParam(name = "page", required = false, defaultValue = "-1") int page,
             @RequestParam(name = "size", required = false, defaultValue = "5") int size,
             @RequestParam(name = "order", required = false, defaultValue = "ASC") Order order
     ) {

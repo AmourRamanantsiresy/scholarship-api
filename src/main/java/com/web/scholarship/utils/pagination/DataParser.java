@@ -21,7 +21,9 @@ public class DataParser<T> {
 
         if (Validator.dataLengthZero(data)) {
             return new DataFormat<>(0, null);
-        } else if (page == -1 || Validator.paginationSize(size, length)) {
+        } else if (page == -2) {
+            return new DataFormat<T>(1, data);
+        } else if (Validator.paginationSize(size, length)) {
             return new DataFormat<T>(1, data);
         } else if (Validator.divisionRestZero(length, size)) {
             List<T> result = data.subList(pageStart, pageEnd);

@@ -70,7 +70,7 @@ public class UniversityService {
     }
 
     @Transactional
-    public List<com.web.scholarship.models.mapper.models.University> createOrUpdate(List<University> university) {
-        return UniversityMapper.parseList(universityRepository.saveAll(university));
+    public List<University> createOrUpdate(List<University> university) {
+        return universityRepository.saveAll(university);
     }
 }

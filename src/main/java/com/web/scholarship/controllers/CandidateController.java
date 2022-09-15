@@ -29,7 +29,7 @@ public class CandidateController {
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
             @RequestParam(name = "size", required = false, defaultValue = "5") int size,
             @RequestParam(name = "order", required = false, defaultValue = "ASC") Order order,
-            @RequestParam(name = "orderBy", required = false, defaultValue = "FISRST_NAME")CandidateSearchType orderBy
+            @RequestParam(name = "orderBy", required = false, defaultValue = "firstName")CandidateSearchType orderBy
             ) {
         return candidateService.getAll(page, size, order, orderBy);
     }
@@ -52,7 +52,7 @@ public class CandidateController {
     }
 
     @PutMapping("")
-    public List<Candidate> createOrUpdate(
+    public List<com.web.scholarship.models.Candidate> createOrUpdate(
             @RequestBody List<com.web.scholarship.models.Candidate> candidates
     ) {
         return candidateService.createCandidate(candidates);

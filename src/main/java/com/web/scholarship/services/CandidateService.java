@@ -34,19 +34,24 @@ public class CandidateService {
 
     public DataFormat<com.web.scholarship.models.mapper.models.Candidate> getAll(int page, int size, Order order, CandidateSearchType orderBy) {
         DataParser<com.web.scholarship.models.mapper.models.Candidate> parse;
-        String by = orderBy == CandidateSearchType.OLD ? "birth_date" : order.toString();
+        String by = orderBy == CandidateSearchType.old ? "birthDate" : orderBy.toString();
         parse = new DataParser<>(CandidateMapper.parseList(candidateRepository.findAll(Sort.by(Sort.Direction.fromString(order.toString()), by))));
         return parse.format(page, size);
     }
 
     public Whoami auth(String username) {
         DBUser user = dbUserRepository.findDBUserByUsername(username);
-        return WhoamiMapper.parse(candidateRepository.findCandidateByCredentials(user));
+        return WhoamiMapper.parse(candidateRepository.findCandidateByCredentialsId(user.getId()));
     }
 
     @Transactional
-    public List<com.web.scholarship.models.mapper.models.Candidate> createCandidate(List<Candidate> candidate) {
-        return CandidateMapper.parseList(candidateRepository.saveAll(candidate));
+    public List<Candidate> createCandidate(List<Candidate> candidateList) {
+        List<Candidate> candidates = candidateList.stream().peek(e -> {
+                    Optional<DBUser> user = dbUserRepository.findById(e.getId());
+                    user.ifPresent(e::setCredentials);
+                }
+        ).toList();
+        return candidateRepository.saveAll(candidates);
     }
 
     public com.web.scholarship.models.mapper.models.Candidate getOne(Long id) {
@@ -60,13 +65,13 @@ public class CandidateService {
     public DataFormat<com.web.scholarship.models.mapper.models.Candidate> searchBy(String searchValue, CandidateSearchType by, int page, int size) {
         DataParser<com.web.scholarship.models.mapper.models.Candidate> parse;
         List<Candidate> candidates;
-        if (by == CandidateSearchType.OLD) {
+        if (by == CandidateSearchType.old) {
             candidates = searchByOld(parseInt(searchValue));
-        } else if (by == CandidateSearchType.FIRST_NAME) {
+        } else if (by == CandidateSearchType.firstName) {
             candidates = searchByFirstname(searchValue);
-        } else if (by == CandidateSearchType.LAST_NAME) {
+        } else if (by == CandidateSearchType.lastName) {
             candidates = searchByLastName(searchValue);
-        } else if (by == CandidateSearchType.SCHOOL_ORIGIN) {
+        } else if (by == CandidateSearchType.schoolOrigin) {
             candidates = searchBySchoolOrigin(searchValue);
         } else {
             candidates = searchByStudyLevel(searchValue);
@@ -85,11 +90,7 @@ public class CandidateService {
 
     public List<Candidate> searchByOld(int old) {
         int year = TimeCalc.yearFromOld(old);
-        return candidateRepository
-                .findAll()
-                .stream()
-                .filter(e -> TimeCalc.yearFromDate(e.getBirthDate()) == year)
-                .toList();
+        return candidateRepository.findAll().stream().filter(e -> TimeCalc.yearFromDate(e.getBirthDate()) == year).toList();
     }
 
     public List<Candidate> searchByStudyLevel(String studyLevel) {

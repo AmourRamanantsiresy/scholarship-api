@@ -30,10 +30,13 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/application/candidate/{id}").authenticated()
                 .antMatchers(HttpMethod.PUT, "/application/apply").authenticated()
                 .anyRequest().hasRole("admin")
+//                .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .and()
                 .logout().permitAll()
+                .and()
+                .cors()
                 .and()
                 .csrf().disable()
                 .httpBasic();

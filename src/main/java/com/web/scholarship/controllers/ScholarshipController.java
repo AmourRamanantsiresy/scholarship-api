@@ -37,7 +37,7 @@ public class ScholarshipController {
             @RequestParam(name = "page", required = false, defaultValue = "1") int page,
             @RequestParam(name = "size", required = false, defaultValue = "5") int size,
             @RequestParam(name = "order", required = false, defaultValue = "ASC") Order order,
-            @RequestParam(name = "by", required = false, defaultValue = "UNIVERSITY") ScholarshipSearchType by
+            @RequestParam(name = "by", required = false, defaultValue = "university") ScholarshipSearchType by
     ) {
         return scholarshipService.getAll(page, size, order, by);
     }
@@ -84,7 +84,7 @@ public class ScholarshipController {
     }
 
     @PutMapping("")
-    public List<Scholarship> createOrUpdate(
+    public List<com.web.scholarship.models.Scholarship> createOrUpdate(
             @RequestBody List<com.web.scholarship.models.Scholarship> scholarships
     ) {
         return scholarshipService.createOrUpdate(scholarships);

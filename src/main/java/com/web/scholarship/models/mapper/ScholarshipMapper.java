@@ -7,6 +7,7 @@ import java.util.List;
 
 public class ScholarshipMapper {
     public static com.web.scholarship.models.mapper.models.Scholarship parse(Scholarship scholarship) {
+        System.out.println(scholarship.getRegistrationDeadline());
         return com.web.scholarship.models.mapper.models.Scholarship.builder()
                 .id(scholarship.getId())
                 .description(scholarship.getDescription())

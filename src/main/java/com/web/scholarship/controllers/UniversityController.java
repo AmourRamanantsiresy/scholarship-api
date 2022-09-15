@@ -52,7 +52,7 @@ public class UniversityController {
     }
 
     @PutMapping("")
-    public List<University> createOrUpdate(
+    public List<com.web.scholarship.models.University> createOrUpdate(
             @RequestBody List<com.web.scholarship.models.University> universities
     ) {
         return universityService.createOrUpdate(universities);

@@ -36,20 +36,24 @@ public class ScholarshipService {
     }
 
     public DataFormat<com.web.scholarship.models.mapper.models.Scholarship> getAll(int page, int size, Order order, ScholarshipSearchType by) {
-        String orderBy = by == ScholarshipSearchType.DEADLINE ? "registration_deadline" : by.toString();
+        String orderBy = by == ScholarshipSearchType.deadline ?
+                "registration_deadline" :
+                (by == ScholarshipSearchType.language) ?
+                        "university" :
+                        by == ScholarshipSearchType.country ? "university" : by.toString();
         DataParser<com.web.scholarship.models.mapper.models.Scholarship> parse = new DataParser<>(ScholarshipMapper.parseList(scholarshipRepository.findAll(Sort.by(Sort.Direction.fromString(order.toString()), orderBy))));
         return parse.format(page, size);
     }
 
     public DataFormat<com.web.scholarship.models.mapper.models.Scholarship> searchScholarship(ScholarshipSearchType type, String name, int page, int size) {
         List<Scholarship> res;
-        if (type == ScholarshipSearchType.FACULTY) {
+        if (type == ScholarshipSearchType.faculty) {
             res = scholarshipRepository.findAllByFaculty_Name(name);
-        } else if (type == ScholarshipSearchType.UNIVERSITY) {
+        } else if (type == ScholarshipSearchType.university) {
             res = scholarshipRepository.findAllByUniversity_Name(name);
-        } else if (type == ScholarshipSearchType.COUNTRY) {
+        } else if (type == ScholarshipSearchType.country) {
             res = searchByCountry(name);
-        } else if (type == ScholarshipSearchType.LANGUAGE) {
+        } else if (type == ScholarshipSearchType.language) {
             res = searchByLanguage(name);
         } else {
             throw new RuntimeException("Bad request");
@@ -88,7 +92,7 @@ public class ScholarshipService {
     }
 
     @Transactional
-    public List<com.web.scholarship.models.mapper.models.Scholarship> createOrUpdate(List<Scholarship> scholarships) {
-        return ScholarshipMapper.parseList(scholarshipRepository.saveAll(scholarships));
+    public List<Scholarship> createOrUpdate(List<Scholarship> scholarships) {
+        return scholarshipRepository.saveAll(scholarships);
     }
 }

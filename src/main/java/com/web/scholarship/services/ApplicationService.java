@@ -50,7 +50,7 @@ public class ApplicationService {
 
     public String close(com.web.scholarship.models.Scholarship scholarship){
         Optional<com.web.scholarship.models.Scholarship> res = scholarshipRepository.findById(scholarship.getId());
-        if(res.isPresent() && res.get().getStatus() != Availability.AVAILABLE){
+        if(res.isPresent() && res.get().getStatus() != Availability.UNAVAILABLE){
             com.web.scholarship.models.Scholarship temp = res.get();
             temp.setStatus(Availability.UNAVAILABLE);
             scholarshipRepository.save(temp);

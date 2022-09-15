@@ -16,5 +16,5 @@ public interface CandidateRepository extends JpaRepository<Candidate, Long> {
 
     List<Candidate> findAllByLastNameIsLikeIgnoreCase(String name);
 
-    Candidate findCandidateByCredentials(DBUser credential);
+    Candidate findCandidateByCredentialsId(Long id);
 }
