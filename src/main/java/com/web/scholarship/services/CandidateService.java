@@ -46,12 +46,12 @@ public class CandidateService {
 
     @Transactional
     public List<Candidate> createCandidate(List<Candidate> candidateList) {
-        List<Candidate> candidates = candidateList.stream().peek(e -> {
-                    Optional<DBUser> user = dbUserRepository.findById(e.getId());
-                    user.ifPresent(e::setCredentials);
-                }
-        ).toList();
-        return candidateRepository.saveAll(candidates);
+//        List<Candidate> candidates = candidateList.stream().pick(e -> {
+//                    Optional<DBUser> user = dbUserRepository.findById(e.getId());
+//                    user.ifPresent(e::setCredentials);
+//                }
+//        ).toList();
+        return candidateRepository.saveAll(candidateList);
     }
 
     public com.web.scholarship.models.mapper.models.Candidate getOne(Long id) {

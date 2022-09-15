@@ -1,5 +1,6 @@
 package com.web.scholarship.services.dbUser;
 
+import com.web.scholarship.models.dbUser.DBRole;
 import com.web.scholarship.models.dbUser.DBUser;
 import com.web.scholarship.repository.dbUser.DBRoleRepository;
 import com.web.scholarship.repository.dbUser.DBUserRepository;
@@ -21,9 +22,11 @@ public class DBUserService {
 
     public DBUser createOrUpdate(DBUser dbUser){
         dbUser.setPassword(new BCryptPasswordEncoder().encode(dbUser.getPassword()));
-        if(dbUser.getDbRoles().size() == 0){
-            dbUser.setDbRoles(List.of(dbRoleRepository.findDBRoleByRole("USER")));
+        List<DBRole> temp = dbUser.getDbRoles();
+        if(temp == null){
+            temp = List.of(dbRoleRepository.findDBRoleByRole("user"));
         }
+        dbUser.setDbRoles(temp);
         return dbUserRepository.save(dbUser);
     }
 
